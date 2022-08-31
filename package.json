@@ -1,8 +1,17 @@
 {
-  "name": "promo-sync-gtag",
-  "version": "0.1.0",
-  "license": "MIT",
-  "author": "Jason R. Stevens, CFA",
+  "name": "@tincre/promo-sync-gtag",
+  "version": "0.0.1",
+  "scope": "@tincre",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tincre/promo-sync-gtag.git"
+  },
+  "homepage": "https://github.com/Tincre/promo-sync-gtag#readme",
+  "bugs": {
+    "url": "https://github.com/Tincre/promo-sync-gtag/issues"
+  },
+  "license": "MPL-2.0",
+  "author": "Jason R. Stevens, CFA on behalf of Tincre <jason@tincre.com> (https://tincre.com)",
   "main": "dist/index.js",
   "module": "dist/promo-sync-gtag.esm.js",
   "typings": "dist/index.d.ts",
