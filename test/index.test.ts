@@ -1,4 +1,4 @@
-import { generateEventIdClientSide } from '../src/index';
+import { generateEventIdClientSide } from '../src/eventId';
 beforeAll(() => {
   /* @ts-ignore */
   global.window = jest.fn();
