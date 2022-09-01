@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import {
   promoEventButtonClick,
   promoEventPromoButtonClick,
@@ -16,31 +17,22 @@ import {
   promoEventSubscribe,
   promoEventViewContent,
 } from '../src/index';
-import { generateEventIdClientSide } from '../src/eventId';
-import crypto from 'crypto';
 
 beforeAll(() => {
   /* @ts-ignore */
   global.window = jest.fn();
-
-  window['google_tag_manager'] = {
-    'GTM-57QS65R': {
-      dataLayer: {
-        get: (gtm: string) => {
-          return {
-            start: 'testStart',
-            uniqueEventId: 'testUniqueEventId',
-          };
-        },
-      },
-    },
-  };
   window['dataLayer'] = [];
+  const testUuid = 'randomUUIDvalue';
+  window['crypto'] = {
+      randomUUID: () => testUuid,
+      getRandomValues: (arr:any) => crypto.getRandomValues(arr.length),
+      subtle: crypto.subtle,
+    }
 });
 
-describe('generateEventIdClientSide', () => {
-  it('returns a string', () => {
-    expect(generateEventIdClientSide()).toBe('testStart.testUniqueEventId');
+describe('gtmEventPageView', () => {
+  it('executes with a data prop object', () => {
+    expect(promoEventPageView({pid: 'abcdefgh'})).toBe(undefined);
   });
 });
 describe('gtmEventPageView', () => {
@@ -132,31 +124,3 @@ describe('PromoEventSignupButtonClick', () => {
   });
 });
 
-
-
-describe('generateEventIdClientSide', () => {
-  it('returns crypto id implementation when google_tag_manager is not present on window', () => {
-    /* @ts-ignore */
-    global.window = jest.fn();
-    let testUuid = 'randomUUIDvalue';
-    /* @ts-ignore */
-    window['crypto'] = {
-      /* @ts-ignore */
-      randomUUID: () => testUuid,
-      /* @ts-ignore */
-      getRandomValues: (arr:any) => crypto.randomBytes(arr.length)
-    }
-    expect(generateEventIdClientSide()).toBe(testUuid);
-  });
-});
-
-/* This needs to be last in the file due to its mangling of the global.window
- * property. */
-describe('generateEventIdClientSide', () => {
-  it('returns undefined when google_tag_manager is not present on window', () => {
-    /* @ts-ignore */
-    global.window = undefined;
-
-    expect(generateEventIdClientSide()).toBe(undefined);
-  });
-});
