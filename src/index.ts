@@ -5,10 +5,30 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 import { gtmEvent } from './event';
+import { loadGtag } from './init';
+
+export default function initPromoSyncGtag(gtmId?: string) {
+  if (typeof gtmId !== 'undefined' && typeof window !== 'undefined') {
+    return new Promise((resolve, reject) => {
+      loadGtag(
+        window,
+        document,
+        'script',
+        'dataLayer',
+        'GTM-57QS65R',
+        resolve,
+        reject
+      );
+    });
+  } else {
+    return new Promise((resolve, reject) => {});
+  }
+}
 
 export function gtmPageView(remainingData: object) {
   gtmEvent('PromoEventPageView', remainingData);
 }
+
 export function promoEventPageView(remainingData: object) {
   gtmPageView(remainingData);
 }
