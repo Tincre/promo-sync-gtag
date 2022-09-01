@@ -13,8 +13,8 @@ import {
   promoEventSubscribe,
   promoEventViewContent,
 } from '../src/index';
-
 import { generateEventIdClientSide } from '../src/eventId';
+import crypto from 'crypto';
 
 beforeAll(() => {
   /* @ts-ignore */
@@ -110,6 +110,23 @@ describe('PromoEventViewContent', () => {
     expect(promoEventViewContent({})).toBe(undefined);
   });
 });
+
+describe('generateEventIdClientSide', () => {
+  it('returns crypto id implementation when google_tag_manager is not present on window', () => {
+    /* @ts-ignore */
+    global.window = jest.fn();
+    let testUuid = 'randomUUIDvalue';
+    /* @ts-ignore */
+    window['crypto'] = {
+      /* @ts-ignore */
+      randomUUID: () => testUuid,
+      /* @ts-ignore */
+      getRandomValues: (arr:any) => crypto.randomBytes(arr.length)
+    }
+    expect(generateEventIdClientSide()).toBe(testUuid);
+  });
+});
+
 /* This needs to be last in the file due to its mangling of the global.window
  * property. */
 describe('generateEventIdClientSide', () => {
