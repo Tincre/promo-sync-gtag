@@ -26,7 +26,7 @@
     "prepare": "dts build",
     "size": "size-limit",
     "start": "dts watch",
-    "test": "dts test"
+    "test": "dts test --coverage"
   },
   "husky": {
     "hooks": {
@@ -39,9 +39,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "jest": {
-    "testEnvironment": "node"
-  },
+  "jest": {},
   "peerDependencies": {},
   "engines": {
     "node": ">=12"
