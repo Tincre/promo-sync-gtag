@@ -13,7 +13,6 @@ export function promoEventPageView(remainingData: object) {
   gtmPageView(remainingData);
 }
 
-
 export function promoEventPromoButtonClick(remainingData: object) {
   gtmEvent('PromoEventPromoButtonClick', remainingData);
 }
