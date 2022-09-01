@@ -1,4 +1,7 @@
 import {
+  promoEventButtonClick,
+  promoEventPromoButtonClick,
+  promoEventSignupButtonClick,
   promoEventPageView,
   promoEventAddPaymentInfo,
   promoEventAddToCart,
@@ -110,6 +113,26 @@ describe('PromoEventViewContent', () => {
     expect(promoEventViewContent({})).toBe(undefined);
   });
 });
+describe('PromoEventButtonClick', () => {
+  it('executes', () => {
+    expect(promoEventButtonClick({})).toBe(undefined);
+  });
+});
+
+describe('PromoEventPromoButtonClick', () => {
+  it('executes', () => {
+    expect(promoEventPromoButtonClick({})).toBe(undefined);
+  });
+});
+
+
+describe('PromoEventSignupButtonClick', () => {
+  it('executes', () => {
+    expect(promoEventSignupButtonClick({})).toBe(undefined);
+  });
+});
+
+
 
 describe('generateEventIdClientSide', () => {
   it('returns crypto id implementation when google_tag_manager is not present on window', () => {
