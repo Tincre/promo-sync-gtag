@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import crypto from 'crypto';
 import {
   promoEventButtonClick,
@@ -24,15 +27,15 @@ beforeAll(() => {
   window['dataLayer'] = [];
   const testUuid = 'randomUUIDvalue';
   window['crypto'] = {
-      randomUUID: () => testUuid,
-      getRandomValues: (arr:any) => crypto.getRandomValues(arr.length),
-      subtle: crypto.subtle,
-    }
+    randomUUID: () => testUuid,
+    getRandomValues: (arr: any) => crypto.getRandomValues(arr.length),
+    subtle: crypto.subtle,
+  };
 });
 
 describe('gtmEventPageView', () => {
   it('executes with a data prop object', () => {
-    expect(promoEventPageView({pid: 'abcdefgh'})).toBe(undefined);
+    expect(promoEventPageView({ pid: 'abcdefgh' })).toBe(undefined);
   });
 });
 describe('gtmEventPageView', () => {
@@ -117,10 +120,8 @@ describe('PromoEventPromoButtonClick', () => {
   });
 });
 
-
 describe('PromoEventSignupButtonClick', () => {
   it('executes', () => {
     expect(promoEventSignupButtonClick({})).toBe(undefined);
   });
 });
-
