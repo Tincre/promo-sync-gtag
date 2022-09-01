@@ -27,7 +27,6 @@ describe('generateEventIdClientSide', () => {
   });
 });
 
-
 describe('generateEventIdClientSide', () => {
   it('returns crypto id implementation when google_tag_manager is not present on window', () => {
     /* @ts-ignore */
@@ -39,8 +38,8 @@ describe('generateEventIdClientSide', () => {
       /* @ts-ignore */
       randomUUID: () => testUuid,
       /* @ts-ignore */
-      getRandomValues: (arr:any) => crypto.randomBytes(arr.length)
-    }
+      getRandomValues: (arr: any) => crypto.randomBytes(arr.length),
+    };
     expect(generateEventIdClientSide()).toBe(testUuid);
   });
 });
@@ -51,7 +50,7 @@ describe('generateEventIdClientSide', () => {
   it('returns undefined when google_tag_manager is not present on window', () => {
     /* @ts-ignore */
     global.window = undefined;
-      
+
     expect(generateEventIdClientSide()).toBe(undefined);
   });
 });
