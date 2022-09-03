@@ -10,6 +10,10 @@ export function gtmPageView(remainingData: object) {
   gtmEvent('PromoEventPageView', remainingData);
 }
 
+export function promoEventPageView(remainingData: object) {
+  gtmPageView(remainingData);
+}
+
 export function promoEventPromoButtonClick(remainingData: object) {
   gtmEvent('PromoEventPromoButtonClick', remainingData);
 }
