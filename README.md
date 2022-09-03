@@ -1,103 +1,111 @@
-# DTS User Guide
+# promo-sync-gtag, by [Tincre`.dev`](https://tincre.dev/)
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with DTS. Let’s get you oriented with what’s here and how to use it.
+Event tracking for Google Tag Manager via Promo ads. Use in conjunction with the [`promo-button`](https://github.com/Tincre/promo-button), your Google Tag Manager and/or Google Analytics and [Tincre Promo](https://tincre.dev/promo').
 
-> This DTS setup is meant for developing libraries (not apps!) that can be published to NPM. If you’re looking to build a Node app, you could use `ts-node-dev`, plain `ts-node`, or simple `tsc`.
+🤯 for your ads on the web, with Google. 
 
-> If you’re new to TypeScript, checkout [this handy cheatsheet](https://devhints.io/typescript)
+## Installation
 
-## Commands
+Use your favorite package manager to rock installation of `promo-sync-gtag`.
 
-DTS scaffolds your new library inside `/src`.
+### Yarn
+```
+yarn add @tincre/promo-sync-gtag # -D if you want this as a dev dep
+```
+### Npm
 
-To run DTS, use:
-
-```bash
-npm start # or yarn start
+```
+npm install @tincre/promo-sync-gtag # --save-dev if you want it as a dev dep
 ```
 
-This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
+### Environment variables 
 
-To do a one-off build, use `npm run build` or `yarn build`.
+You'll need the following environment variables available in Node.js:
 
-To run tests, use `npm test` or `yarn test`.
+- `PROMO_CLIENT_ID`
+- `PROMO_CLIENT_SECRET` 
+- `PROMO_APP_ID`
+- `PROMO_API_KEY` (optional)
 
-## Configuration
+These values can be found in the [Tincre.dev Dashboard](https://tincre.dev/dashboard)
+after you're logged in and have created at least one app. 
 
-Code quality is set up for you with `prettier`, `husky`, and `lint-staged`. Adjust the respective fields in `package.json` accordingly.
+#### `.env.local` Example
 
-### Jest
-
-Jest tests are set up to run with `npm test` or `yarn test`.
-
-### Bundle Analysis
-
-[`size-limit`](https://github.com/ai/size-limit) is set up to calculate the real cost of your library with `npm run size` and visualize the bundle with `npm run analyze`.
-
-#### Setup Files
-
-This is the folder structure we set up for you:
-
-```txt
-/src
-  index.ts        # EDIT THIS
-/test
-  index.test.ts   # EDIT THIS
-.gitignore
-package.json
-README.md         # EDIT THIS
-tsconfig.json
+```env 
+PROMO_API_KEY=
+PROMO_CLIENT_ID=
+PROMO_APP_ID=
+PROMO_CLIENT_SECRET=
 ```
+### Usage 
 
-### Rollup
+To use a Google Tag (Analytics) event simply import it into your framework of choice and fire the function. 
 
-DTS uses [Rollup](https://rollupjs.org) as a bundler and generates multiple rollup configs for various module formats and build settings. See [Optimizations](#optimizations) for details.
+> 🌶️ Typically this is in a `useEffect` hook within the function body if you're a React user.
 
-### TypeScript
+```jsx 
+import { promoEventPageView } from '@tincre/promo-sync-gtag';
 
-`tsconfig.json` is set up to interpret `dom` and `esnext` types, as well as `react` for `jsx`. Adjust according to your needs.
-
-## Continuous Integration
-
-### GitHub Actions
-
-Two actions are added by default:
-
-- `main` which installs deps w/ cache, lints, tests, and builds on all pushes against a Node and OS matrix
-- `size` which comments cost comparison of your library on every pull request using [`size-limit`](https://github.com/ai/size-limit)
-
-## Optimizations
-
-Please see the main `dts` [optimizations docs](https://github.com/weiran-zsd/dts-cli#optimizations). In particular, know that you can take advantage of development-only optimizations:
-
-```js
-// ./types/index.d.ts
-declare var __DEV__: boolean;
-
-// inside your code...
-if (__DEV__) {
-  console.log('foo');
+export default function PageOrComponent() {
+  promoEventPageView()  
+  return <></>;
 }
 ```
 
-You can also choose to install and use [invariant](https://github.com/weiran-zsd/dts-cli#invariant) and [warning](https://github.com/weiran-zsd/dts-cli#warning) functions.
+#### `useEffect` example
+```jsx
+import { useEffect } from 'react';
+import { promoEventPageView } from '@tincre/promo-sync-gtag';
 
-## Module Formats
+export default function PageOrComponent() {
+  useEffect(() => {
+    promoEventPageView()  
+  }, [])
+  return <></>;
+}
+```
+## Support 
 
-CJS, ESModules, and UMD module formats are supported.
+- Documentation: [tincre.dev/docs](https://tincre.dev/docs)
+- Guides and how-tos: [tincre.dev/docs/guides](https://tincre.dev/docs/guides) 
+- Reference docs: [tincre.dev/docs/reference](https://tincre.dev/docs/reference)
+- Community: [community.tincre.dev](https://community.tincre.dev)
 
-The appropriate paths are configured in `package.json` and `dist/index.js` accordingly. Please report if any issues are found.
+## License 
 
-## Named Exports
+This code is free to use for your commercial or personal projects. It is open-source 
+licensed under the [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/).
 
-Per Palmer Group guidelines, [always use named exports.](https://github.com/palmerhq/typescript#exports) Code split inside your React app instead of your React library.
+You will see various headers throughout the codebase and can reference the license 
+directly via [LICENSE](/LICENSE) herein.
 
-## Including Styles
+## Development 
 
-There are many ways to ship styles, including with CSS-in-JS. DTS has no opinion on this, configure how you like.
+### Releases 
 
-For vanilla CSS, you can include it at the root directory and add it to the `files` section in your `package.json`, so that it can be imported separately by your users and run through their bundler's loader.
+We use [`npm`](https://npmjs.com) for releases. In particular, we use
+`npm --publish` to get the job done.
 
-## Publishing to NPM
+Currently, only @thinkjrs has the ability to release. The following section 
+is written for memory.
 
-We recommend using [np](https://github.com/sindresorhus/np).
+#### Release prep
+
+Prior to using `npm --publish` a release tag needs to be created for
+the library using our standard tagging practices. 
+
+> Ensure that tests :white_check_mark: pass during this process prior to
+releasing via npm.
+
+##### Test release 
+
+To do a proper release, ensure you're in the base repo directory and run 
+`npm publish . --access public --dry-run`.
+
+#### Release `latest` tag
+
+To complete a full release to the `latest` npm `dist-tag`, ensure you're in
+the base repo directory and run `npm publish . --access public`. 
+
+:tada: That's it! :tada:
