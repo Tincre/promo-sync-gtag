@@ -9,6 +9,7 @@ import { gtmEvent } from './event';
 export function gtmPageView(remainingData: object) {
   gtmEvent('PromoEventPageView', remainingData);
 }
+
 export function promoEventPageView(remainingData: object) {
   gtmPageView(remainingData);
 }
