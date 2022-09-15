@@ -17,6 +17,35 @@ yarn add @tincre/promo-sync-gtag # -D if you want this as a dev dep
 ```
 npm install @tincre/promo-sync-gtag # --save-dev if you want it as a dev dep
 ```
+### Setup
+As high as possible in the `<head>` tag on each page of your site add the following:
+
+```js
+import { promoGtag } from '@tincre/promo-sync-gtag';
+
+<script async>{promoGtag}</script>
+```
+
+As usual you can grab our minified build and link to that as a universal script, loaded prior to the code snippet directly above (and without the `import` statement).
+
+#### Next.js setup 
+As we at [Tincre](https://tincre.com) are proud [Next.js](https://nextjs.org) users, below is a snippet you can use for performant Next.js sites.
+
+In your `pages/_app.{js,jsx,ts,tsx}` file:
+```jsx 
+import Script from 'next/script';
+import { promoGtag } from '@tincre/promo-sync-gtag';
+
+export default function MyApp({component, pageProps,}) {
+
+  return (
+    <>
+      <Script id="google-tag-manager" strategy={"afterInteractive"}>{promoGtag}</Script>
+      <Component {...pageProps} />
+    </>
+  )
+}
+```
 ### Usage 
 
 To use a Google Tag (Analytics) event simply import it into your framework of choice and fire the function. 
