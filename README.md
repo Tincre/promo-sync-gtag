@@ -17,27 +17,6 @@ yarn add @tincre/promo-sync-gtag # -D if you want this as a dev dep
 ```
 npm install @tincre/promo-sync-gtag # --save-dev if you want it as a dev dep
 ```
-
-### Environment variables 
-
-You'll need the following environment variables available in Node.js:
-
-- `PROMO_CLIENT_ID`
-- `PROMO_CLIENT_SECRET` 
-- `PROMO_APP_ID`
-- `PROMO_API_KEY` (optional)
-
-These values can be found in the [Tincre.dev Dashboard](https://tincre.dev/dashboard)
-after you're logged in and have created at least one app. 
-
-#### `.env.local` Example
-
-```env 
-PROMO_API_KEY=
-PROMO_CLIENT_ID=
-PROMO_APP_ID=
-PROMO_CLIENT_SECRET=
-```
 ### Usage 
 
 To use a Google Tag (Analytics) event simply import it into your framework of choice and fire the function. 
