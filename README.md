@@ -17,26 +17,37 @@ yarn add @tincre/promo-sync-gtag # -D if you want this as a dev dep
 ```
 npm install @tincre/promo-sync-gtag # --save-dev if you want it as a dev dep
 ```
+### Setup
+As high as possible in the `<head>` tag on each page of your site add the following:
 
-### Environment variables 
+```js
+import { promoGtag } from '@tincre/promo-sync-gtag';
 
-You'll need the following environment variables available in Node.js:
+<script type="module" src="https://unpkg.com/browse/@tincre/promo-sync-gtag@0.0.3/dist/promo-sync-gtag.esm.js">
+  import { loadPromoGtag } from '@tincre/promo-sync-gtag';
+  loadPromoGtag();
+</script>
+```
 
-- `PROMO_CLIENT_ID`
-- `PROMO_CLIENT_SECRET` 
-- `PROMO_APP_ID`
-- `PROMO_API_KEY` (optional)
+As usual you can grab our minified build and link to that as a universal script, loaded prior to the code snippet directly above (and without the `import` statement).
 
-These values can be found in the [Tincre.dev Dashboard](https://tincre.dev/dashboard)
-after you're logged in and have created at least one app. 
+#### Next.js setup 
+As we at [Tincre](https://tincre.com) are proud [Next.js](https://nextjs.org) users, below is a snippet you can use for performant Next.js sites.
 
-#### `.env.local` Example
+In your `pages/_app.{js,jsx,ts,tsx}` file:
+```jsx 
+import Script from 'next/script';
+import { promoGtag } from '@tincre/promo-sync-gtag';
 
-```env 
-PROMO_API_KEY=
-PROMO_CLIENT_ID=
-PROMO_APP_ID=
-PROMO_CLIENT_SECRET=
+export default function MyApp({component, pageProps,}) {
+
+  return (
+    <>
+      <Script id="google-tag-manager" strategy={"afterInteractive"}>{promoGtag}</Script>
+      <Component {...pageProps} />
+    </>
+  )
+}
 ```
 ### Usage 
 
