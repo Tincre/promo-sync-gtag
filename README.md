@@ -23,7 +23,10 @@ As high as possible in the `<head>` tag on each page of your site add the follow
 ```js
 import { promoGtag } from '@tincre/promo-sync-gtag';
 
-<script async>{promoGtag}</script>
+<script type="module" src="https://unpkg.com/browse/@tincre/promo-sync-gtag@0.0.3/dist/promo-sync-gtag.esm.js">
+  import { loadPromoGtag } from '@tincre/promo-sync-gtag';
+  loadPromoGtag();
+</script>
 ```
 
 As usual you can grab our minified build and link to that as a universal script, loaded prior to the code snippet directly above (and without the `import` statement).
