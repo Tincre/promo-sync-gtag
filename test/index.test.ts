@@ -20,7 +20,7 @@ import {
   promoEventSubscribe,
   promoEventViewContent,
   promoGtag,
-  loadPromoGtag,
+  //loadPromoGtag,
 } from '../src/index';
 
 beforeAll(() => {
@@ -134,8 +134,8 @@ describe('promoGtag', () => {
   });
 });
 
-describe('loadPromoGtag', () => {
-  it('executes', () => {
-    loadPromoGtag()
-  });
-});
+//describe('loadPromoGtag', () => {
+//  it('executes', () => {
+//    loadPromoGtag();
+//  });
+//});
