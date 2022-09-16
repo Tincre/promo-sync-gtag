@@ -12,6 +12,9 @@ export const promoGtag = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.sta
   'https://sync.tincre.dev/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-57QS65R');`;
 
+export function loadPromoGtag() {
+  setTimeout(promoGtag, 0)
+}
 export function gtmPageView(remainingData: object) {
   gtmEvent('PromoEventPageView', remainingData);
 }
