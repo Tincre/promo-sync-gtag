@@ -19,6 +19,7 @@ import {
   promoEventSubmitApplication,
   promoEventSubscribe,
   promoEventViewContent,
+  promoGtag,
 } from '../src/index';
 
 beforeAll(() => {
@@ -123,5 +124,11 @@ describe('PromoEventPromoButtonClick', () => {
 describe('PromoEventSignupButtonClick', () => {
   it('executes', () => {
     expect(promoEventSignupButtonClick({})).toBe(undefined);
+  });
+});
+
+describe('promoGtag', () => {
+  it('is a string', () => {
+    expect(typeof promoGtag).toBe('string');
   });
 });
