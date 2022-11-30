@@ -11,7 +11,8 @@ export const promoGtag = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.sta
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   'https://sync.tincre.dev/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-57QS65R');`;
-
+export const promoGtmId = 'GTM-57QS65R';
+export const promoGtmSrc = `https://sync.tincre.dev/gtm.js?id=${promoGtmId}`;
 export function loadPromoGtag() {
   ((w, d, s, l, i) => {
     /*@ts-ignore*/
@@ -28,7 +29,7 @@ export function loadPromoGtag() {
     j.src = 'https://sync.tincre.dev/gtm.js?id=' + i + dl;
     /*@ts-ignore*/
     f.parentNode.insertBefore(j, f);
-  })(window, document, 'script', 'dataLayer', 'GTM-57QS65R');
+  })(window, document, 'script', 'dataLayer', promoGtmId);
 }
 
 export function gtmPageView(remainingData: object) {
