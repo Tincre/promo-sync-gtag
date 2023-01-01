@@ -5,6 +5,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 import { gtmEvent } from './event';
+import { generateEventIdClientSide } from './eventId';
 
 export const promoGtag = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -99,3 +100,5 @@ export function promoEventSubscribe(remainingData: object) {
 export function promoEventViewContent(remainingData: object) {
   gtmEvent('PromoEventViewContent', remainingData);
 }
+
+export { generateEventIdClientSide };
